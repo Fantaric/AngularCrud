@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Embedded, Employee, RootObject } from '../Employee';
@@ -17,10 +17,14 @@ export class DataRestService {
     return this.http.get<RootObject>(apiURL);
   }
 
-  deleteRows(){
+  deleteRows(apiURL : string): Observable<RootObject>{
 
+   // let httpParams = new HttpParams().set('id', i);
+   // let options = { params: httpParams };
+
+     return this.http.delete<RootObject>(apiURL);
   }
 
-
+  
 
 }

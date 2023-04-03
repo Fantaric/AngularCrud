@@ -23,7 +23,8 @@ export class TableComponent {
   data: RootObject | undefined;
   links: Links2 | undefined;
   error: any;
-  
+  id : RootObject | undefined
+  url : string | undefined
   
   getData(url: string){
     this.dataRest.getDataRows(url).subscribe(
@@ -53,9 +54,17 @@ export class TableComponent {
     if(this.data) this.getData(this.data._links.last.href)
   }
 
+  // cancellazione singola riga tabella
   deleteRow(i : string){
-    console.log(i)
-    const obj = JSON.parse(i);
+    this.url = "http://localhost:8080/employees/" + i;
+    this.dataRest.deleteRows(this.url).subscribe(
+      data => {this.data = data;
+      window.location.reload()},
+      error => this.error = error
+    )
   }
+
+
+
 
 }
