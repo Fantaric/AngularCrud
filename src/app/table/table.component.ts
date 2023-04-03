@@ -14,7 +14,7 @@ export class TableComponent {
   dataSource :MatTableDataSource<RootObject> = new MatTableDataSource<RootObject>([]);
 
   constructor(private dataRest: DataRestService){ 
-    this.getData();
+    this.getData("http://localhost:8080/employees");
     //this.dataSource = new MatTableDataSource();
   }
   
@@ -25,8 +25,8 @@ export class TableComponent {
   error: any;
   
   
-  getData(){
-    this.dataRest.getDataRows("http://localhost:8080/employees").subscribe(
+  getData(url: string){
+    this.dataRest.getDataRows(url).subscribe(
       data => {
         this.data = data;
         this.links = data._links
@@ -37,12 +37,25 @@ export class TableComponent {
   }
 
 
-  pageDown(){
-
+  pageUp(){
+    if(this.data) this.getData(this.data._links.next.href)
   }
 
-  pageUp(){
+  pageDown(){
+    if(this.data) this.getData(this.data._links.prev.href)
+  }
 
+  firstPage(){
+    if(this.data) this.getData(this.data._links.first.href)
+  }
+
+  lastPage(){
+    if(this.data) this.getData(this.data._links.last.href)
+  }
+
+  deleteRow(i : string){
+    console.log(i)
+    const obj = JSON.parse(i);
   }
 
 }

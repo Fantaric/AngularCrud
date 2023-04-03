@@ -17,6 +17,7 @@ export interface Links2 {
     next: Self;
     last: Self;
     profile: Self;
+    prev: Self;
   }
   
 export interface Self2 {

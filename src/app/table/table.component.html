@@ -1,4 +1,3 @@
-
 <div>
 <table mat-table [dataSource]="data._embedded.employees" class="mat-elevation-z8" *ngIf="data">
 
@@ -31,12 +30,23 @@
 
     <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> action </th>
-        <td mat-cell *matCellDef="let element"> {{element.action}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.action}} 
+          <button mat-button (click) = deleteRow(element) >Delete</button>
+        </td>
+        
       </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <br>
+  
+  
+    <button (click) = firstPage() [disabled] = "!data?._links?.first"> &lt; &lt; </button>
+    <button (click) = pageDown() [disabled] = "!data?._links?.prev"> &lt; </button>
+    <button (click) = pageUp() [disabled] = "!data?._links?.next"> &gt; </button>
+    <button (click) = lastPage() [disabled] = "!data?._links?.last"> &gt; &gt; </button>
 
-  <button (click) = pageDown()> </button>
+
+  
 </div>
