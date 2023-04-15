@@ -17,12 +17,20 @@ export class DataRestService {
     return this.http.get<RootObject>(apiURL);
   }
 
-  deleteRows(apiURL : string): Observable<RootObject>{
+  modifieRows(apiURL: string, body : any): Observable<Employee>{
+    return this.http.post<Employee>(apiURL, body);
+  }
 
+
+  deleteRows(apiURL : string): Observable<RootObject>{
    // let httpParams = new HttpParams().set('id', i);
    // let options = { params: httpParams };
-
      return this.http.delete<RootObject>(apiURL);
+  }
+
+  
+  addRows(apiURL : string, body: any): Observable<Employee>{
+    return this.http.put<Employee>(apiURL, body);
   }
 
   
