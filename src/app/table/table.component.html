@@ -6,6 +6,11 @@
           The actual rendered columns are set as a property on the row definition" -->
   
     <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="firstName">
       <th mat-header-cell *matHeaderCellDef> firstName </th>
       <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
@@ -30,7 +35,7 @@
     </ng-container>
 
     <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> action </th>
+        <th mat-header-cell *matHeaderCellDef> <app-dialog></app-dialog> </th>
         <td mat-cell *matCellDef="let element"> {{element.action}} 
           <div class="example-button-container">
             <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click) = modifieRow(element.id) class="margine" >
@@ -53,81 +58,12 @@
   
     <button (click) = firstPage() [disabled] = "!data?._links?.first"> &lt; &lt; </button>
     <button (click) = pageDown() [disabled] = "!data?._links?.prev"> &lt; </button>
+    {{this.data?.page?.number}}
     <button (click) = pageUp() [disabled] = "!data?._links?.next"> &gt; </button>
     <button (click) = lastPage() [disabled] = "!data?._links?.last"> &gt; &gt; </button>
 
     <br>
     <br>
 
-    <!--*(ngSubmit)="stampa(myform)">-->
-    <form #myform = "ngForm" (ngSubmit)="addRow(myform)" [hidden]="isDisplayed">
-      
-      <br>
-      <br>
-      <mat-form-field appearance="fill">
-        <mat-label>firstName</mat-label>
-        <input matInput name="firstName" ngModel required>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>LastName</mat-label>
-        <input matInput name="lastName" ngModel required>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" class="example-form-field">
-        <mat-label>birthDate</mat-label>
-        <input matInput [matDatepicker]="datepicker" name="birthDate" ngModel required>
-        <mat-hint>YYYY-MM-DD</mat-hint>
-        <mat-datepicker #datepicker>
-        </mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Gender</mat-label>
-        <input matInput name="gender" ngModel required>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" class="example-form-field">
-        <mat-label>Hiredate</mat-label>
-        <input matInput [matDatepicker]="datepicker" name="hireDate" ngModel required>
-        <mat-hint>YYYY-MM-DD</mat-hint>
-        <mat-datepicker #datepicker>
-        </mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Id</mat-label>
-        <input matInput name="id" ngModel required>
-      </mat-form-field>
-      
-      <input type="submit" value="Insert">
-
-  </form>
-
-<!--
-    <form method="">
-      <h1>Insert Employee</h1>
-      <mat-form-field class="">
-        <mat-label>firstName</mat-label>
-        <input matInput name = "nome">
-      </mat-form-field>
-      <mat-form-field class="">
-        <mat-label>lastName</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field class="">
-        <mat-label>birthDate</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field class="">
-        <mat-label>gender</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field class="">
-        <mat-label>hireDate</mat-label>
-        <input matInput>
-      </mat-form-field> -->
-
-    
-
+  
 </div>

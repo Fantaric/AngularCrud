@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DataRestService } from '../services/data-rest.service';
-import { MatTableDataSource} from '@angular/material/table';
-import { Embedded, Employee, Links2, RootObject } from '../Employee';
+import { MatTable, MatTableDataSource} from '@angular/material/table';
+import { Employee, Links2, RootObject } from '../Employee';
 import { NgForm } from '@angular/forms';
+import { DialogComponent } from '../dialog/dialog.component';
 
 
 @Component({
@@ -13,13 +14,13 @@ import { NgForm } from '@angular/forms';
 export class TableComponent {
 
   dataSource :MatTableDataSource<RootObject> = new MatTableDataSource<RootObject>([]);
-
+  
   constructor(private dataRest: DataRestService){ 
     this.getData("http://localhost:8080/employees");
-    //this.dataSource = new MatTableDataSource();
+    this.dataSource._renderChangesSubscription
   }
   
-  displayedColumns: string[] = ['firstName', 'lastName', 'birthDate', 'gender', 'action'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'birthDate', 'gender', 'action'];
 
   data: RootObject | undefined;
   links: Links2 | undefined;
@@ -27,16 +28,16 @@ export class TableComponent {
   id : RootObject | undefined
   url : string | undefined
   Employee : Employee | undefined
+  pageNumber : BigInteger | undefined
+ 
+
+  @ViewChild(DialogComponent) dialog:DialogComponent | undefined;
   
-  public isDisplayed = true
-
-
   getData(url: string){
     this.dataRest.getDataRows(url).subscribe(
       data => {
         this.data = data;
         this.links = data._links
-        
       },
       error => this.error = error
     )
@@ -69,25 +70,22 @@ export class TableComponent {
     )
   }
 
-  modifieRow(body: NgForm){
-    this.isDisplayed = false;
-    this.url = "http://localhost:8080/employees/";
-    this.dataRest.modifieRows(this.url, body.value).subscribe(
-    )
+  modifieRow(id : number){
+    this.dialog?.openDialogModifie(id)
   }
 
   addRow(form :NgForm){
-    this.dataRest.addRows("http://localhost:8080/employees/2000", form.value).subscribe(
+    this.dataRest.addRows("http://localhost:8080/employees/", form.value).subscribe(
       Employee => {this.Employee = Employee
         alert('Nuovo Dipendente Aggiunto')}
     )
   }
 
-  
-
-
-  
-
-
 
 }
+
+  
+
+
+
+

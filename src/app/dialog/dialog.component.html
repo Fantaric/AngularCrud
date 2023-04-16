@@ -1,0 +1,99 @@
+    <ng-template #callAPIDialog >
+        <form #myform = "ngForm" (ngSubmit)="addRow(myform)">
+      
+            <br>
+            <br>
+            <mat-form-field appearance="fill">
+              <mat-label>firstName</mat-label>
+              <input matInput name="firstName" ngModel required>
+            </mat-form-field>
+            <br>
+      
+            <mat-form-field appearance="fill">
+              <mat-label>LastName</mat-label>
+              <input matInput name="lastName" ngModel required>
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="fill" class="example-form-field">
+              <mat-label>birthDate</mat-label>
+              <input matInput [matDatepicker]="datepicker" name="birthDate" ngModel required>
+              <mat-hint>YYYY-MM-DD</mat-hint>
+              <mat-datepicker #datepicker>
+              </mat-datepicker>
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Gender</mat-label>
+              <input matInput name="gender" ngModel required>
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="fill" class="example-form-field">
+              <mat-label>Hiredate</mat-label>
+              <input matInput [matDatepicker]="datepicker" name="hireDate" ngModel required>
+              <mat-hint>YYYY-MM-DD</mat-hint>
+              <mat-datepicker #datepicker>
+              </mat-datepicker>
+            </mat-form-field>
+            <br>
+            <br>
+      
+            <button mat-raised-button color="green" type="submit" mat-button >Submit</button>
+            <button mat-raised-button matDialogClose="no"  color="warn" >Cancel</button>
+      
+        </form>
+    </ng-template>
+
+    <ng-template #modifieEmployee >
+        <form #myform = "ngForm" (ngSubmit)="modifieRow(myform)">
+      
+            <br>
+            <br>
+            <mat-form-field appearance="fill">
+              <mat-label>firstName</mat-label>
+              <input matInput name="firstName" placeholder='{{EmployeePlaceHolder?.firstName}}'ngModel required>
+            </mat-form-field>
+            <br>
+      
+            <mat-form-field appearance="fill">
+              <mat-label>LastName</mat-label>
+              <input matInput name="lastName" placeholder='{{EmployeePlaceHolder?.lastName}}' ngModel required>
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="fill" class="example-form-field">
+              <mat-label>birthDate</mat-label>
+              <input matInput [matDatepicker]="datepicker" name="birthDate" placeholder='{{EmployeePlaceHolder?.birthDate}}' ngModel required>
+              <mat-hint>YYYY-MM-DD</mat-hint>
+              <mat-datepicker #datepicker>
+              </mat-datepicker>
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Gender</mat-label>
+              <input matInput name="gender" placeholder='{{EmployeePlaceHolder?.gender}}' ngModel required>
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="fill" class="example-form-field">
+              <mat-label>Hiredate</mat-label>
+              <input matInput [matDatepicker]="datepicker" name="hireDate" placeholder='{{EmployeePlaceHolder?.hireDate}}' ngModel required>
+              <mat-hint>YYYY-MM-DD</mat-hint>
+              <mat-datepicker #datepicker>
+              </mat-datepicker>
+            </mat-form-field>
+            <br>
+            <br>
+      
+            
+            <button mat-raised-button color="green" type="submit" mat-button >Submit</button>
+            <button mat-raised-button matDialogClose="no"  color="warn" >Cancel</button>
+      
+        </form>
+    </ng-template>
+
+      <button mat-raised-button (click)="openDialog() " color="accent">Add Employee</button>
+

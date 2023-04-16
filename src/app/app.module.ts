@@ -13,17 +13,22 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
     MatNativeDateModule,
+    MatDialogModule,
     MatButtonModule,
     MatDatepickerModule,
     MatTableModule,
