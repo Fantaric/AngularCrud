@@ -2,8 +2,8 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DataRestService } from '../services/data-rest.service';
-import { Embedded, Employee, Links2, RootObject } from '../Employee';
-import { NgTemplateOutlet } from '@angular/common';
+import { Employee } from '../Employee';
+
 
 
 @Component({
@@ -19,7 +19,6 @@ export class DialogComponent {
   idEmp : number | undefined
   
   constructor(public dialog: MatDialog, private dataRest: DataRestService) {}
-
 
   @ViewChild('callAPIDialog')
   callAPIDialog!: TemplateRef<any>;
@@ -40,7 +39,7 @@ export class DialogComponent {
     this.url = "http://localhost:8080/employees/" + id;
     this.dataRest.getDataRow(this.url).subscribe(
         Employee1 => {this.EmployeePlaceHolder = Employee1
-          const dialogRef = this.dialog.open(this.modifieEmployee);}
+          this.dialog.open(this.modifieEmployee);}
     );
   }
 

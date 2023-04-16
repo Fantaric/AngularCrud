@@ -15,7 +15,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
-import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponent } from './dialog/dialog.component';;
+
 
 
 

@@ -17,7 +17,6 @@ export class TableComponent {
   
   constructor(private dataRest: DataRestService){ 
     this.getData("http://localhost:8080/employees");
-    this.dataSource._renderChangesSubscription
   }
   
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'birthDate', 'gender', 'action'];
@@ -42,7 +41,6 @@ export class TableComponent {
       error => this.error = error
     )
   }
-
 
   pageUp(){
     if(this.data) this.getData(this.data._links.next.href)
