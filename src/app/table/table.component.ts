@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { DataRestService } from '../services/data-rest.service';
 import { MatTable, MatTableDataSource} from '@angular/material/table';
 import { Employee, Links2, RootObject } from '../Employee';
@@ -24,15 +24,14 @@ export class TableComponent {
   data: RootObject | undefined;
   links: Links2 | undefined;
   error: any;
-  id : RootObject | undefined
-  url : string | undefined
-  Employee : Employee | undefined
-  pageNumber : BigInteger | undefined
+  url : string | undefined;
+  Employee : Employee | undefined;
+  currentUrl : string | undefined;
  
-
   @ViewChild(DialogComponent) dialog:DialogComponent | undefined;
   
   getData(url: string){
+    this.currentUrl = url;
     this.dataRest.getDataRows(url).subscribe(
       data => {
         this.data = data;
@@ -58,26 +57,32 @@ export class TableComponent {
     if(this.data) this.getData(this.data._links.last.href)
   }
 
-  // cancellazione singola riga tabella
   deleteRow(i : string){
     this.url = "http://localhost:8080/employees/" + i;
     this.dataRest.deleteRows(this.url).subscribe(
       data => {this.data = data;
-      window.location.reload()},
-      error => this.error = error
-    )
+      if (this.currentUrl)
+        this.getData(this.currentUrl);
+    });
   }
 
-  modifieRow(id : number){
-    this.dialog?.openDialogModifie(id)
+  modifieRow(Employee : Employee){
+    const dialogRef = this.dialog?.openDialogModifie(Employee, this.currentUrl, this.getData);
+    dialogRef?.afterClosed().subscribe(result => {
+      if(this.currentUrl)
+        this.getData(this.currentUrl);
+    });
+
   }
 
-  addRow(form :NgForm){
-    this.dataRest.addRows("http://localhost:8080/employees/", form.value).subscribe(
-      Employee => {this.Employee = Employee
-        alert('Nuovo Dipendente Aggiunto')}
-    )
+  addRow() {
+    const dialogRef = this.dialog?.openDialog()
+    dialogRef?.afterClosed().subscribe(result => {
+        this.lastPage()
+    })
   }
+
+
 
 
 }
