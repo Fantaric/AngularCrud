@@ -1,8 +1,7 @@
     <ng-template #callAPIDialog >
+      <div class="formInsert">
         <form #myform = "ngForm" (ngSubmit)="addRow(myform)">
-      
-            <br>
-            <br>
+         <h1> Add Employee</h1>
             <mat-form-field appearance="fill">
               <mat-label>firstName</mat-label>
               <input matInput name="firstName" ngModel required>
@@ -15,26 +14,28 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="fill" class="example-form-field">
-              <mat-label>birthDate</mat-label>
-              <input matInput [matDatepicker]="datepicker" name="birthDate" ngModel required>
-              <mat-hint>YYYY-MM-DD</mat-hint>
-              <mat-datepicker #datepicker>
-              </mat-datepicker>
+            <mat-form-field appearance="fill">
+              <mat-label>Gender</mat-label>
+              <mat-select name="gender" ngModel required>
+                <mat-option value="M"> M </mat-option>
+                <mat-option value="F"> F </mat-option>
+              </mat-select>
             </mat-form-field>
             <br>
 
             <mat-form-field appearance="fill">
-              <mat-label>Gender</mat-label>
-              <input matInput name="gender" ngModel required>
+              <mat-label>birthDate</mat-label>
+              <input matInput [matDatepicker]="picker" ngModel required name="birthDate">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="fill" class="example-form-field">
+            <mat-form-field appearance="fill">
               <mat-label>Hiredate</mat-label>
-              <input matInput [matDatepicker]="datepicker" name="hireDate" ngModel required>
-              <mat-hint>YYYY-MM-DD</mat-hint>
-              <mat-datepicker #datepicker>
+              <input matInput [matDatepicker]="datepicker2" name="hireDate" ngModel required>
+              <mat-datepicker-toggle matIconSuffix [for]="datepicker2"></mat-datepicker-toggle>
+              <mat-datepicker #datepicker2>
               </mat-datepicker>
             </mat-form-field>
             <br><br>
@@ -43,13 +44,13 @@
             <button mat-raised-button matDialogClose="no"  color="warn" >Cancel</button>
       
         </form>
+      </div>
     </ng-template>
 
     <ng-template #modifieEmployee >
+      <div class="formInsert">
         <form #myform = "ngForm" (ngSubmit)="modifieRow(myform)">
-      
-            <br>
-            <br>
+          <h1> Modifie Employee</h1>
             <mat-form-field appearance="fill">
               <mat-label>firstName</mat-label>
               <input matInput name="firstName" [(ngModel)]="Employee.firstName" required>
@@ -61,26 +62,29 @@
               <input matInput name="lastName" [(ngModel)]="Employee.lastName" required>
             </mat-form-field>
             <br>
+            
+            <mat-form-field appearance="fill">
+              <mat-label>Gender</mat-label>
+              <mat-select name="gender" [(ngModel)]="Employee.gender" required>
+                <mat-option value="M"> M </mat-option>
+                <mat-option value="F"> F </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
 
-            <mat-form-field appearance="fill" class="example-form-field">
+            <mat-form-field appearance="fill">
               <mat-label>birthDate</mat-label>
-              <input matInput [matDatepicker]="datepicker" name="birthDate" [(ngModel)]="Employee.birthDate" required>
-              <mat-hint>YYYY-MM-DD</mat-hint>
-              <mat-datepicker #datepicker>
+              <input matInput [matDatepicker]="datepicker1" name="birthDate" [(ngModel)]="Employee.birthDate" required>
+              <mat-datepicker-toggle matIconSuffix [for]="datepicker1"></mat-datepicker-toggle>
+              <mat-datepicker #datepicker1>
               </mat-datepicker>
             </mat-form-field>
             <br>
 
             <mat-form-field appearance="fill">
-              <mat-label>Gender</mat-label>
-              <input matInput name="gender" [(ngModel)]="Employee.gender" required>
-            </mat-form-field>
-            <br>
-
-            <mat-form-field appearance="fill" class="example-form-field">
               <mat-label>Hiredate</mat-label>
               <input matInput [matDatepicker]="datepicker" name="hireDate"[(ngModel)]="Employee.hireDate" required>
-              <mat-hint>YYYY-MM-DD</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
               <mat-datepicker #datepicker>
               </mat-datepicker>
             </mat-form-field>
@@ -92,6 +96,7 @@
             <button mat-raised-button matDialogClose="no"  color="warn" >Cancel</button>
       
         </form>
+      </div>
     </ng-template>
 
       <button mat-raised-button color="accent">Add Employee</button>

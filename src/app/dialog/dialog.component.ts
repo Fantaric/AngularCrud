@@ -44,6 +44,7 @@ export class DialogComponent {
   }
 
   addRow(form: NgForm) {
+    console.log(form.value)
     this.dataRest.addRows("http://localhost:8080/employees/", form.value).subscribe(
       Employee => {
         this.Employee = Employee
@@ -53,6 +54,7 @@ export class DialogComponent {
   }
 
   modifieRow(body: NgForm) {
+    console.log(body.value)
     this.url = "http://localhost:8080/employees/" + this.Employee.id;
     this.dataRest.modifieRows(this.url, body.value).subscribe(
       Employee => {

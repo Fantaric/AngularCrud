@@ -15,3 +15,11 @@ table
 .margine{
     margin-right: 2rem;
 }
+
+.divAction{
+    width: 100%;
+}
+
+.thAction{
+    text-align: center;
+}
